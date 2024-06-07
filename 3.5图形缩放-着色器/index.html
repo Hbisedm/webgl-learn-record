@@ -24,15 +24,15 @@
 	<script>
 		 /** @type {HTMLCanvasElement} */
 		const ctx = document.getElementById('canvas')
-		
-		/*** @param {!WebGLRenderingContext} gl */ 
+
+		/*** @param {!WebGLRenderingContext} gl */
 		const gl = ctx.getContext('webgl')
 
 		 // 顶点着色器
 		 const vertexShaderSource = `
 		  // 存储限定符 类型  变量名;
 		  attribute vec4 aPosition; // 顶点位置
-			attribute float aScale; 
+			attribute float aScale;
 			 void main() {
 			 		gl_Position = vec4(aPosition.x * aScale, aPosition.y * aScale, aPosition.z , 1.0);
 			 		gl_PointSize = 10.0; // 点的大小
@@ -50,10 +50,10 @@
 		console.log('program')
 		console.log(program)
 		const aPosition = gl.getAttribLocation(program, 'aPosition') // 获取属性位置
-		const aScale = gl.getAttribLocation(program, 'aScale') 
+		const aScale = gl.getAttribLocation(program, 'aScale')
 
 		const points = new Float32Array([
-			0.5, 0.5, 
+			0.5, 0.5,
 			0.5, -0.5,
 			-0.5, 0.5
 			-0.5, -0.5,
@@ -66,7 +66,7 @@
 		gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW) // 向缓冲区中写入数据
 
 		gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0) // 定义属性指针
-		
+
 		gl.enableVertexAttribArray(aPosition) // 启用属性数组
 
 		let x = 1

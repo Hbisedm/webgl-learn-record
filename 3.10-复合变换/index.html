@@ -24,8 +24,8 @@
 	<script>
 		 /** @type {HTMLCanvasElement} */
 		const ctx = document.getElementById('canvas')
-		
-		/*** @param {!WebGLRenderingContext} gl */ 
+
+		/*** @param {!WebGLRenderingContext} gl */
 		const gl = ctx.getContext('webgl')
 
 		 // 顶点着色器
@@ -37,8 +37,8 @@
 			uniform mat4 rotateMatrix;
 			 void main() {
 			 		gl_Position = translateMatrix * scaleMatrix * rotateMatrix * aPosition;
-		  }   
-		 `                
+		  }
+		 `
 
 		 // 片元着色器
 		 const fragmentShaderSource = `
@@ -55,7 +55,7 @@
 		const rotateMatrix = gl.getUniformLocation(program,'rotateMatrix') // 获取uniform位置
 
 		const points = new Float32Array([
-			-0.5, -0.5, 
+			-0.5, -0.5,
 			0.5, -0.5,
 			0.0, 0.5
 		])
@@ -67,7 +67,7 @@
 		gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW) // 向缓冲区中写入数据
 
 		gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0) // 定义属性指针
-		
+
 		gl.enableVertexAttribArray(aPosition) // 启用属性数组
 
 		let deg = 0

@@ -25,8 +25,8 @@
 	<script>
 		 /** @type {HTMLCanvasElement} */
 		const ctx = document.getElementById('canvas')
-		
-		/*** @param {!WebGLRenderingContext} gl */ 
+
+		/*** @param {!WebGLRenderingContext} gl */
 		const gl = ctx.getContext('webgl')
 
 		 // 顶点着色器
@@ -51,7 +51,7 @@
 		const aPosition = gl.getAttribLocation(program, 'aPosition') // 获取属性位置
 
 		gl.vertexAttrib1f(aPosition, 0.0)
-	
+
 		gl.drawArrays(gl.POINTS, 0, 1)
 
 

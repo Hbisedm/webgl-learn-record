@@ -13,13 +13,13 @@
 	<script>
 		 /** @type {HTMLCanvasElement} */
 		const ctx = document.getElementById('canvas')
-		
-		/*** @param {!WebGLRenderingContext} gl */ 
+
+		/*** @param {!WebGLRenderingContext} gl */
 		const gl = ctx.getContext('webgl')
 
 		// 指定清除<canvas>颜色
 		gl.clearColor(1, 0, 0, 1.0)
-		
+
 		// 清除<canvas>
 		/**
 			gl.COLOR_BUFFER_BIT清空颜色缓存

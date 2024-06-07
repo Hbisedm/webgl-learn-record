@@ -24,8 +24,8 @@
 	<script>
 		 /** @type {HTMLCanvasElement} */
 		const ctx = document.getElementById('canvas')
-		
-		/*** @param {!WebGLRenderingContext} gl */ 
+
+		/*** @param {!WebGLRenderingContext} gl */
 		const gl = ctx.getContext('webgl')
 
 		 // 顶点着色器
@@ -56,8 +56,8 @@
 		const program = initShader(gl, vertexShaderSource, fragmentShaderSource)
 
 		const aPosition = gl.getAttribLocation(program, 'aPosition') // 获取属性位置
-		const aTex = gl.getAttribLocation(program, 'aTex') 
-		const uSampler = gl.getUniformLocation(program, 'uSampler') 
+		const aTex = gl.getAttribLocation(program, 'aTex')
+		const uSampler = gl.getUniformLocation(program, 'uSampler')
 
 		const points = new Float32Array([
 			-0.5, 0.5, 0.0, 1.0,
@@ -75,12 +75,12 @@
 		gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW) // 向缓冲区中写入数据
 
 		gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, BYTES * 4, 0)
-		
+
 		gl.enableVertexAttribArray(aPosition) // 启用属性数组
 
 		gl.vertexAttribPointer(aTex, 2, gl.FLOAT, false, BYTES * 4, BYTES * 2)
-		
-		gl.enableVertexAttribArray(aTex) 
+
+		gl.enableVertexAttribArray(aTex)
 
 		gl.drawArrays(gl.POINTS, 0, 4)
 
@@ -90,7 +90,7 @@
 		img.onload = function() {
 			// 创建纹理对象
 			const texture = gl.createTexture()
-			
+
 			// 翻转 图片 Y轴
 			gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1)
 

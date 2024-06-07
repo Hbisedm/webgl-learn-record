@@ -24,8 +24,8 @@
 	<script>
 		 /** @type {HTMLCanvasElement} */
 		const ctx = document.getElementById('canvas')
-		
-		/*** @param {!WebGLRenderingContext} gl */ 
+
+		/*** @param {!WebGLRenderingContext} gl */
 		const gl = ctx.getContext('webgl')
 
 		 // 顶点着色器
@@ -52,7 +52,7 @@
 		const aPointSize = gl.getAttribLocation(program, 'aPointSize') // 获取属性位置
 
 		const points = new Float32Array([
-			0.5, 0.5, 10.0, 
+			0.5, 0.5, 10.0,
 			-0.5, -0.5, 20.0,
 			0.5, -0.5, 30.0,
 			-0.5, 0.5, 40.0
@@ -67,11 +67,11 @@
 		const BYTES = points.BYTES_PER_ELEMENT
 
 		gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, BYTES * 3, 0) // 定义属性指针
-		
+
 		gl.enableVertexAttribArray(aPosition) // 启用属性数组
 
 		gl.vertexAttribPointer(aPointSize, 1, gl.FLOAT, false, BYTES * 3, BYTES * 2) // 定义属性指针
-		
+
 		gl.enableVertexAttribArray(aPointSize) // 启用属性数组
 
 		gl.drawArrays(gl.POINTS, 0, 4)

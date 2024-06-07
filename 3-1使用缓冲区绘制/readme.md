@@ -7,7 +7,7 @@
 
 在webgl中，需要处理大量的**相同类型数据**，所以引入类型化数组，这样程序就可以预知到数组中的数据类型，提高性能。
 
-类型化数组类型: 
+类型化数组类型:
 
 Int32Array、UInt32Array、Float32Array、Float64Array
 
