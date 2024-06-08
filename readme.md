@@ -1,3 +1,3 @@
-# 记录
+# webGL learn
 
-记录`webGL`和`three.js`的基础学习
+`webGL`和`three.js`的基础知识

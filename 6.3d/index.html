@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>webgl</title>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	#canvas {
+		background-color: gray;
+		display: block;
+		margin: 0 auto;
+	}
+</style>
+<body>
+	<canvas id="canvas" width="300" height="300">
+		Your browser does not support the canvas element.
+	</canvas>
+	<script src="../lib/index.js"></script>
+	<script>
+		 /** @type {HTMLCanvasElement} */
+		const ctx = document.getElementById('canvas')
+
+		/*** @param {!WebGLRenderingContext} gl */
+		const gl = ctx.getContext('webgl')
+
+		 // 顶点着色器
+		 const vertexShaderSource = `
+		  // 存储限定符 类型  变量名;
+		  attribute vec4 aPosition; // 顶点位置
+			uniform mat4 mat;
+			 void main() {
+			 		gl_Position = mat * aPosition;
+		  }
+		 `
+
+		 // 片元着色器
+		 const fragmentShaderSource = `
+			void main() {
+				gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+			}
+		 `
+
+		const program = initShader(gl, vertexShaderSource, fragmentShaderSource)
+
+		const aPosition = gl.getAttribLocation(program, 'aPosition') // 获取属性位置
+		const mat = gl.getUniformLocation(program,'mat') // 获取uniform位置
+
+		const points = new Float32Array([
+			-0.5, -0.5,
+			0.5, -0.5,
+			0.0, 0.5
+		])
+
+		const buffer = gl.createBuffer() // 创建缓冲区
+
+		gl.bindBuffer(gl.ARRAY_BUFFER, buffer) // 绑定缓冲区
+
+		gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW) // 向缓冲区中写入数据
+
+		gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0) // 定义属性指针
+
+		gl.enableVertexAttribArray(aPosition) // 启用属性数组
+
+		let eyey = -0.1
+		function animation() {
+			eyey += 0.01
+			if(eyey > 1) {
+				eyey = -0.1
+			}
+      const vm = getViewMatrix(
+        0.0, eyey, 0.2,
+        0.0, 0.0, 0.0,
+        0.0, 0.6, 0.0
+      )
+      gl.uniformMatrix4fv(mat, false, vm)
+			// 二维平移矩阵
+			// const matrix = getTranslateMatrix(x, x)
+			// gl.uniformMatrix4fv(mat, false, matrix)
+
+			// 绘制
+			gl.drawArrays(gl.TRIANGLES, 0, 3)
+			requestAnimationFrame(() => animation())
+		}
+
+		animation()
+
+	</script>
+</body>
+</html>
