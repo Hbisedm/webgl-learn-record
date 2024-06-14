@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ 	<style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+</head>
+<body>
+
+  <script src="../lib/three/three.js"></script>
+  <script src="../lib/three/dat.gui.js"></script>
+  <script src="../controls/index.js"></script>
+  <script type="module">
+    // import * as THREE from '../lib/three.module.js';
+
+    const scene  = new THREE.Scene();
+
+    // 透视投影矩阵
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 1, 1000);
+
+    camera.position.set(0, 0, 20);
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+
+    const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+    const cubeMaterial = new THREE.MeshNormalMaterial();
+    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    scene.add(cube);
+
+    // 添加灯光
+    const spotLight = new THREE.SpotLight(0xffffff)
+    spotLight.position.set(-10, 10, 90);
+    scene.add(spotLight)
+
+
+
+    spotLight.shadowMapWidth = 4096;
+    spotLight.shadowMapHeight = 4096;
+
+    initControls(cubeMaterial, camera);
+    function animation() {
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+
+      renderer.render(scene, camera);
+
+      requestAnimationFrame(animation);
+    }
+
+    animation()
+
+  </script>
+</body>
+</html>

@@ -54,15 +54,15 @@
 
     scene.add(plane);
 
-    // 添加环境光
+    // 添加光
     const ambientLight = new THREE.AmbientLight(0x000000); // soft white light
     scene.add(ambientLight)
 
 
     // 添加灯光
-    const directionalLight = new THREE.DirectionalLight(0xffffff)
-    directionalLight.position.set(-10, 10, 90);
-    scene.add(directionalLight)
+    const hemisphereLight = new THREE.HemisphereLight(0xff00ff, 0x00ff00)
+    hemisphereLight.position.set(-10, 10, 90);
+    scene.add(hemisphereLight)
 
     cube.castShadow = true
     sphere.castShadow = true
@@ -70,25 +70,12 @@
     plane.receiveShadow = true
     // 设置灯光开启阴影
 
-    directionalLight.castShadow = true
-    renderer.shadowMapEnabled = true
-
-    directionalLight.shadowCameraLeft = -50;
-    directionalLight.shadowCameraRight = 50;
-    directionalLight.shadowCameraTop = 50
-    directionalLight.shadowCameraBottom = -50
-    directionalLight.shadowCameraNear = 2;
-    directionalLight.shadowCameraFar = 200;
-
-    directionalLight.shadowMapWidth = 4096;
-    directionalLight.shadowMapHeight = 4096;
-
-
-
-    initControls(directionalLight);
+    initControls(hemisphereLight);
     function animation() {
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
+
+      hemisphereLight.position.z -= 0.1;
 
       renderer.render(scene, camera);
 
